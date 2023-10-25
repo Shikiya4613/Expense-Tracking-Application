@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ExpenseTrackingApplication</string>
+    <string name="button_edit">Add New Expense</string>
+    <string name="activity2_name">Add/Edit Expense</string>
+    <string name="main_header">Expense Tracking</string>
+    <string name="button_reply">Submit</string>
+    <string name="expense_text6">Notes</string>
+    <string name="expense_text5">Reason</string>
+    <string name="expense_text4">Cost</string>
+    <string name="expense_text3">Category</string>
+    <string name="expense_text2">Name</string>
+    <string name="expense_text1">Date</string>
+    <string name="second_header">Add/Edit Expense</string>
+    <string name="expense_detail1_hint">Select date</string>
+    <string name="main_spinner_guide">Sort/Search By:</string>
+</resources>
