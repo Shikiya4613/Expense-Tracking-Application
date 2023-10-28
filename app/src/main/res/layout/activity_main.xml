@@ -18,16 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/button_edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="launchSecondActivity"/>
 
     <TextView
         android:id="@+id/spinner_guide"
@@ -41,45 +31,83 @@
 
     <Spinner
         android:id="@+id/spinner_main"
-        android:layout_width="240dp"
-        android:layout_height="24dp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_guide" />
 
+    <EditText
+        android:id="@+id/text_search_input"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/text_searchbar"
+        android:hint="@string/text_searchbar_hint"
+        app:layout_constraintStart_toEndOf="@+id/spinner_main"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_guide" />
+
+    <Button
+        android:id="@+id/text_search_button"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/button_filter"
+        android:textSize="10sp"
+        android:onClick="filterList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_search_input"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_guide" />
+
     <ListView
-        android:id="@+id/expense_list"
+        android:id="@+id/expenseList"
         android:layout_width="360dp"
         android:layout_height="420dp"
-        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textTotal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_main" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/totalGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Total:"
+        android:layout_marginBottom="24dp"
+        android:text="@string/text_total_guide"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button_main"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expense_list" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="213dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="104dp"
+    <EditText
+        android:id="@+id/textTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:clickable="false"
+        android:ems="10"
+        android:focusable="false"
+        android:inputType="text"
+        android:text="@string/text_total"
         app:layout_constraintBottom_toTopOf="@+id/button_main"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expense_list"
-        app:layout_constraintVertical_bias="0.555" />
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toEndOf="@+id/totalGuide" />
+
+    <Button
+        android:id="@+id/button_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/button_edit"
+        android:onClick="launchSecondActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

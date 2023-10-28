@@ -13,4 +13,18 @@
     <string name="second_header">Add/Edit Expense</string>
     <string name="expense_detail1_hint">Select date</string>
     <string name="main_spinner_guide">Sort/Search By:</string>
+    <string name="text_total">$ 0.00</string>
+    <string name="text_total_guide">Total:</string>
+    <string name="expense_note">note</string>
+    <string name="expense_reason">reason</string>
+    <string name="expense_date">date</string>
+    <string name="expense_category">category</string>
+    <string name="expense_cost">cost</string>
+    <string name="expense_name">name</string>
+    <string name="expense_delete">delete</string>
+    <string name="expense_edit">edit</string>
+    <string name="text_dollar_sign">$</string>
+    <string name="text_searchbar" />
+    <string name="button_filter">Filter</string>
+    <string name="text_searchbar_hint">Search List</string>
 </resources>

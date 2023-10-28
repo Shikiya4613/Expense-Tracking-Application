@@ -48,13 +48,11 @@ public class SecondActivity extends AppCompatActivity {
                 String input = editable.toString();
                 if (!input.isEmpty()) {
                     if (input.length() > priceTracker) {
-                        System.out.println("+" + Double.parseDouble(input));
                         String cost = String.format("%.2f", Double.parseDouble(input)*10);
                         expenseCost.setText(cost);
                         priceTracker = cost.length();
                     }
                     else {
-                        System.out.printf("-" + Double.parseDouble(input));
                         String cost = String.format("%.2f", Double.parseDouble(input)/10);
                         expenseCost.setText(cost);
                         priceTracker = input.length();
@@ -64,7 +62,6 @@ public class SecondActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    System.out.printf("0" + Double.parseDouble(input));
                     expenseCost.setText("0.00");
                     priceTracker = 4;
                 }
@@ -72,10 +69,43 @@ public class SecondActivity extends AppCompatActivity {
                 expenseCost.setSelection(priceTracker);
             }
         });
+
+        Intent data = getIntent();
+        if (data.hasExtra("editExpense")) {
+            String[] load = data.getStringArrayExtra("editExpense");
+
+            EditText name = findViewById(R.id.expense_detail2_input);
+            EditText cost = findViewById(R.id.expense_detail4_input);
+            EditText date = findViewById(R.id.expense_detail1_input);
+            EditText category = findViewById(R.id.expense_detail3_input);
+            EditText reason = findViewById(R.id.expense_detail5_input);
+            EditText note = findViewById(R.id.expense_detail6_input);
+
+            System.out.println(load[1]);
+
+            name.setText(load[0]);
+            cost.setText(Double.toString(Double.parseDouble(load[1])/10));
+            date.setText(load[2]);
+            category.setText(load[3]);
+            reason.setText(load[4]);
+            note.setText(load[5]);
+        }
     }
 
     public void returnToMainActivity(View view) {
+        EditText name = findViewById(R.id.expense_detail2_input);
+        EditText cost = findViewById(R.id.expense_detail4_input);
+        EditText date = findViewById(R.id.expense_detail1_input);
+        EditText category = findViewById(R.id.expense_detail3_input);
+        EditText reason = findViewById(R.id.expense_detail5_input);
+        EditText note = findViewById(R.id.expense_detail6_input);
+
+        String[] expense = {name.getText().toString(), cost.getText().toString(), date.getText().toString(),
+                category.getText().toString(), reason.getText().toString(), note.getText().toString()};
+
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("New Expense", expense);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

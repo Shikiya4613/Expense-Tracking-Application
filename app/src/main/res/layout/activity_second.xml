@@ -106,17 +106,30 @@
         app:layout_constraintTop_toBottomOf="@+id/expense_detail3_input" />
 
     <EditText
-        android:id="@+id/expense_detail4_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/text_dollar_sign"
+        android:layout_width="24dp"
+        android:layout_height="0dp"
         android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/text_dollar_sign"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expense_detail4" />
+
+    <EditText
+        android:id="@+id/expense_detail4_input"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/expense_detail5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expense_detail4"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/text_dollar_sign"
+        app:layout_constraintTop_toBottomOf="@+id/expense_detail4" />
 
     <TextView
         android:id="@+id/expense_detail5"
@@ -176,5 +189,6 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         android:onClick="returnToMainActivity"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

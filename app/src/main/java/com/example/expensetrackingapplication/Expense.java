@@ -2,26 +2,50 @@ package com.example.expensetrackingapplication;
 
 public class Expense{
     private String name;
-    private String category;
     private double cost;
-    private String reason;
-    private String notes;
+    private String category;
     private String date;
+    private String reason;
+    private String note;
 
     public Expense() {
         name = "";
-        reason = "";
-        category = "";
-        notes = "";
         cost = 0.0;
         date = "";
+        category = "";
+        reason = "";
+        note = "";
     }
-    public Expense(String name, String reason, String category, String notes, double cost, String date) {
-        name = this.name;
-        reason = this.reason;
-        category = this.category;
-        notes = this.notes;
-        cost = this.cost;
-        date = this.date;
+    public Expense(String name, double cost, String date, String category, String reason, String note) {
+        this.name = name;
+        this.cost = cost;
+        this.date = date;
+        this.category = category;
+        this.reason = reason;
+        this.note = note;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public String getNote() {
+        return note;
     }
 }
