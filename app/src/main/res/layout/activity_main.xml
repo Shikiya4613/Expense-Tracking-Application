@@ -81,7 +81,7 @@
         android:layout_marginBottom="24dp"
         android:text="@string/text_total_guide"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button_main"
+        app:layout_constraintBottom_toTopOf="@+id/button_add"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -94,13 +94,13 @@
         android:focusable="false"
         android:inputType="text"
         android:text="@string/text_total"
-        app:layout_constraintBottom_toTopOf="@+id/button_main"
+        app:layout_constraintBottom_toTopOf="@+id/button_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toEndOf="@+id/totalGuide" />
 
     <Button
-        android:id="@+id/button_main"
+        android:id="@+id/button_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -109,5 +109,20 @@
         android:onClick="launchSecondActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/button_reset"
+        android:onClick="reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_add"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTotal"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

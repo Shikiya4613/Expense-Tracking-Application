@@ -7,8 +7,11 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,19 +26,25 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ExpenseAdapter.ExpenseListListener {
 
-    private Expense[] example = {new Expense("Rent", 1300.00, "2023/09/30", "Rent and Utilities", "rent for October", "example item 1"),
+    private static final String EXPENSE_KEY = "expenseList";
+    private static final String PREFS_NAME = "expenseAddress";
+
+    /* private Expense[] example = {new Expense("Rent", 1300.00, "2023/09/30", "Rent and Utilities", "rent for October", "example item 1"),
             new Expense("Gas Refill", 20.00, "2023/09/21",  "Transportation", "out of gas", "example item 2"),
             new Expense("Grocery", 123.45, "2023/09/21", "Food", "out of food", "example item 3"),
-            new Expense("Pizza Delivery",  36.00, "2023/09/27", "Food", "lunch at work","example item 4")};
+            new Expense("Pizza Delivery",  36.00, "2023/09/27", "Food", "lunch at work","example item 4")};*/
     private String filter = " ";
     private ExpenseAdapter adapter;
     private List<Expense> expenses;
     private ActivityResultLauncher<Intent> launcher;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         Spinner spinner = findViewById(R.id.spinner_main);
         String[] optList = {" ","date", "name", "category"};
@@ -47,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements ExpenseAdapter.Ex
         adapter = new ExpenseAdapter(getApplicationContext());
         listView.setAdapter(adapter);
 
-        expenses = new ArrayList<>();
-        expenses = Arrays.asList(example);
+        //expenses = new ArrayList<>(Arrays.asList(example));
+        expenses = loadExpense();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -75,14 +84,57 @@ public class MainActivity extends AppCompatActivity implements ExpenseAdapter.Ex
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             String[] components = data.getStringArrayExtra("New Expense");
-                            adapter.add(new Expense(components[0], Double.parseDouble(components[1]), components[2], components[3], components[4], components[5]));
+                            Expense newExpense = new Expense(components[0], Double.parseDouble(components[1]), components[2], components[3], components[4], components[5]);
+                            adapter.add(newExpense);
+                            expenses.add(newExpense);
                             recalculate();
+                            saveExpense();
                         }
                     }
                 }
         );
-
          adapter.setListener(this);
+    }
+
+    public void saveExpense() {
+        SharedPreferences.Editor editor = preferences.edit();
+        StringBuilder builder = new StringBuilder();
+        for (Expense expense : expenses) {
+            builder.append(serialize(expense)).append(",");
+        }
+        editor.putString(EXPENSE_KEY, builder.toString());
+        editor.apply();
+    }
+
+    public List<Expense> loadExpense() {
+        List<Expense> loadedExpenseList = new ArrayList<>();
+        String[] expenseItems = preferences.getString(EXPENSE_KEY, "").split(",");
+        for (String expenseItem : expenseItems) {
+            if (!expenseItem.isEmpty()) {
+                Expense newExpense = deserialize(expenseItem);
+                loadedExpenseList.add(newExpense);
+            }
+        }
+        recalculate();
+        return loadedExpenseList;
+    }
+
+    public void reset(View view) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+        expenses.clear();
+        adapter.clear();
+        recalculate();
+    }
+
+    public String serialize(Expense expense) {
+        return expense.getName() + "|" + expense.getCost() + "|" + expense.getDate() + "|" + expense.getCategory() + "|" + expense.getReason() + "|" + expense.getNote();
+    }
+
+    public Expense deserialize(String expenseItem) {
+        String[] components = expenseItem.split("\\|");
+        return new Expense(components[0], Double.parseDouble(components[1]), components[2], components[3], components[4], components[5]);
     }
 
     public void launchSecondActivity(View view) {
